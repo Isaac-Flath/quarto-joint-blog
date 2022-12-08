@@ -1,0 +1,196 @@
+---
+title: Adding Subscriptions to a Quarto Site
+subtitle: Subscribable Subscriptions
+description: A no nonsense, to-the-point guide to implementing subscriptions in your Quarto site.
+author:
+  - Isaac Flath
+  - Salman Naqvi
+date: 2022-12-XX
+categories: [Quarto, Blogging]
+toc: false
+draft: true
+---
+
+We are writing this blog post to give a few options for adding email subscriptions to blog pages built in quarto in a step by step tutorial.  The [quarto documentation](https://quarto.org/docs/websites/website-blog.html#subscriptions) covers the Quarto part, but does not include steps not related to Quarto with setting up the subscriber list or third party account.  This post is intended to be a step-by-step guide **that fills in the gaps from the [quarto documentation](https://quarto.org/docs/websites/website-blog.html).**
+
+There are many options for setting this up.  Among them:
+
++ MailChimp: Mailchimp is mentioned in the quarto documentation briefly, but we have chose not to cover Mailchimp as it seems that they are working on deprecating the RSS email feed functionality that is necessary.
++ MailerLite: We believe this is a strong alternative to MailChimp.  Easy to set up and easy to use.
++ Online Forms: Though more manual, it's good for just getting started or if you do not have an alternative address — many services like MailerLite require you to include an address in your emails.
++ HTML/JS: When you want to handle the backend.
+
+::::{.panel-tabset}
+
+# Predefined Services
+
+## Option 1
+
+The first thing we need to do is create a MailerLite Campaign.  That is what will actually send the email.
+
+
+:::{.callout-note}
+
+## MailerLite Campaign Setup
+
+1. Make sure RSS feeds are enabled on your blog.  Instructions for how to do this are in [the Quarto Documentation](https://quarto.org/docs/websites/website-blog.html#rss-feed)
+1. [Create a MailerLite account](https://www.mailerlite.com/signup)
+1. Once you have an account and are logged in [Create an RSS Campaign](https://dashboard.mailerlite.com/campaigns/create).  You will need to fill in some information, including the URL of your RSS feed.  It should be a URL that ends with `.xml`.
+1. On the content page, choose start from scratch (free tier) or select a template (paid) and design your email that will go out
+1. Select All Active Subscribers to send to. 
+1. Continue through to schedule
+:::
+
+:::{.callout-important}
+When you create an RSS campaign there are templates that can be used in the content tab for designing this email.  These are paid features that you get for free for the first 30 days.  Only use the templates if you intend to pay as they are not included in the free plan.
+:::
+
+:::{.callout-tip}
+
+ You can create individual subscriber groups to have different campaigns go to different groups to give subscribers more options.  [Example here](https://isaac-flath.tech/blog.html)
+ 
+:::
+
+Now that the campaign is set up, we need to create the widget that allows users to subscribe to the blog.  In Quarto, this is defined in the `subscribe.html` file.
+
+:::{.callout-note}
+
+## Create subscribe.html
+
+1. [Create an embedded form](https://dashboard.mailerlite.com/forms/create?type=embedded)
+1. Use the GUI editor to style your embedded form!
+1. Once you created the form it will take you to that forms `Overview` page.  Scroll down to look for the `Embed form into your website` section
+1. In that section select `HTML Code` and copy the code provided
+1. Create a paste this code into a `subscribe.html` file at the top level of your blog's directory
+:::
+
+:::{.callout-note}
+
+## Modify _quarto.yml
+
+Add the `subscribe.html` file to your `_quarto.yml` file by adding it to the `margin-header` attribute.  This option will look like this in your `_quarto.yml` file.
+
+```yaml
+website:
+  # (additional metadata excluded for brevity)
+  margin-header: subscribe.html
+```
+
+## Conclusion
+
+That is all it takes to get subscriptions working on your blog with MailerLite!  Everything you just set up is editable so if you don't like how the email or the subscription widget looks, you can go in and edit your templates.
+:::
+
+### Live example
+
+Check out [Isaac Flath's blog]() to see the MailChimp widget in action!
+
+# The Manual Way
+
+## Option 2
+
+Perhaps you don't have an alternative address. Or perhaps you just want something simple to get started with. There's still a way to implement blog
+subscriptions! It requires more manual effort, but gets the job done: embedding online forms (e.g., Google Forms, Microsoft Forms, etc.).
+
+It involves embedding a form in your website, collecting responses in a spreadsheet, creating a mailing list from that spreadsheet, and composing and
+sending an email to the created list.
+
+The example in the steps below use Google Forms, though it would be very similar to Microsoft Forms. The steps below should also generally apply to any
+other online forms service.
+
+### Step 1: Create the form.
+
+Using your online form provider of choice, create your form! A simple form would include a text box for inputting an email, with a simple check to see if
+the entered email is valid.
+
+_[INSERT SCREENSHOT HERE OF SUCH FORM]_
+
+On Google Forms, you have an option to implement email checking with the following option.
+
+_[INSERT SCREENSHOT HERE OF SUCH CHECKING]_
+
+:::{.callout-note appearance="simple"}
+You may want to allow responses to be edited after submission, create a confirmation message, and disable a link to submit another response.
+
+In Google Forms, these options can be toggled under the 'Settings' tab.
+:::
+
+### Step 2: Obtain the embed snippet.
+
+Obtain the HTML snippet which you can paste into your website's source.
+
+Press send.
+
+_[INSERT SCREENSHOT OF SEND BUTTON]_
+
+Go to the embed tab.
+
+_[INSERT SCREENSHOT OF EMBED TAB]_
+
+Copy the snippet.
+
+### Step 3: Embed the embed
+
+Paste the snippet whereever you want to put the form on your site!
+
+_[INSERT SCREENSHOT OF SNIPPET IN AN ACTUAL QMD FILE]_
+
+You can adjust the size of the embed by tweaking these values.
+
+_[INSERT SCREENSHOT OF VALUES HIGHLIGHTED]_
+
+### Step 4: Unsubscribing.
+
+Repeat steps 1-3 above and create a form that would allow subscribers to unsubscribe from receiving notifications. Make sure this form is clearly
+accessible in your site.
+
+### Step 5: Gathering emails.
+
+Head to the responses tab of your form.
+
+_[INSERT SCREENSHOT OF RESPONSES TAB]_
+
+Google Forms will have generated a spreadsheet containing emails addresses you have received. You can take these addresses and creating a mailing list in
+the email service of your choice.
+
+**At the same time,** check the responses in your unsubscribe form and tally them against the responses received in your subscribe form. Remove any email
+addresses that need to be removed.
+
+### Step 6: Compose and send!
+
+Now compose the email how you would like to, and hit that send button!
+
+:::{.callout-warning appearance="simple"}
+# Before you hit that send button!
+Make sure you include a clearly visible link in your email that would allow recipients to unsubscribe.
+:::
+
+### Step 0: Extras
+
+:::{.callout-tip appearance="simple"}
+You could combine the subscribe and unsubscribe forms into a single form so it would be easier to manage. The form would initially ask if a user would like
+to subscribe or unsubscribe. Based on their input, the form would take them to the appropriate section.
+
+Further expanding on this, if your site has multiple feeds, the form could also ask which feed the user would like to subscribe to or unsubscribe from.
+:::
+
+### Live example
+
+Check out [Salman Naqvi's ForBlog]() to see embedded forms in action!
+
+# HTML & JS
+
+## Option 3
+
+Perhaps you know some HTML and JS, or even only JS, and don't have an alternative address. Instead of creating the frontend with HTML, try using the [Quarto
+HTML Forms](https://github.com/jlgraves-ubc/forms) extension by [Jonathan Graves](https://github.com/jlgraves-ubc).
+
+This extension allows you to implement HTML forms through [Quarto Shortcodes]() and YAML Options. However, you still will need to handle the backend with
+JavaScript and perhaps a few other technologies. If you're interested in implementing it this way, you probably already know how to. If not, there are
+plenty of great guides online!.
+
+::::
+
+## Acknowledgements
+
+Thanks to Isaac Flath for collaborating with me on this guide! You can view his blog, works, and contact here (blog link)[].
