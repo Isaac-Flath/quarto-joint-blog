@@ -20,13 +20,13 @@ twitter-card:
 
 ![](images/thumbnail.png)
 
-The [Quarto Documenation](https://quarto.org/docs/websites/website-blog.html#subscriptions) covers how to implement website subscriptoins at a surface level. This guide goes into the details on how on could do so, with three different options. **That said**, this guide can also be helpful for sites that do not use Quarto.
+The [Quarto Documenation](https://quarto.org/docs/websites/website-blog.html#subscriptions) covers how to implement website subscriptions at a surface level. This guide goes into the details on how one could do so, with three different options. **That said**, this guide can also be helpful for sites that do not use Quarto.
 
 The three ways this guide will cover:
 
 * **Readymade Services**
 
-  These are services that handle and automate everything for you. MailChimp is mentioned in the Quarto Docs as one option, but is not covered in this guide as it seems they are depracting the RSS email feed function which is necessary. Instead, we have found MailerLite to be a suitable alternative that is easy to setup and use.
+  These are services that handle and automate everything for you. MailChimp is mentioned in the Quarto Docs as one option, but is not covered in this guide as it appears they are depracting the RSS email feed function which is necessary. Instead, we have found MailerLite to be a suitable alternative that is easy to setup and use.
 
 * **Online Forms**
 
@@ -48,7 +48,7 @@ The first thing we need to do is create a MailerLite Campaign.  That is what wil
 
 1. Make sure RSS feeds are enabled on your blog.  Instructions for how to do this are in [the Quarto Documentation](https://quarto.org/docs/websites/website-blog.html#rss-feed).
 1. [Create a MailerLite account](https://www.mailerlite.com/signup).
-1. Once you have an account and are logged in [Create an RSS Campaign](https://dashboard.mailerlite.com/campaigns/create).  You will need to fill in some information, including the URL of your RSS feed.  It should be a URL that ends with `.xml`.
+1. Once you have an account and are logged in, [create an RSS Campaign](https://dashboard.mailerlite.com/campaigns/create).  You will need to fill in some information, including the URL of your RSS feed.  It should be a URL that ends with `.xml`.
 1. On the content page, choose start from scratch (free tier) or select a template (paid) and design your email that will go out.
 1. Select All Active Subscribers to send to. 
 1. Continue through to schedule.
@@ -72,7 +72,7 @@ Now that the campaign is set up, we need to create the widget that allows users 
 1. Use the GUI editor to style your embedded form!
 1. Once you created the form it will take you to that forms `Overview` page.  Scroll down to look for the `Embed form into your website` section.
 1. In that section select `HTML Code` and copy the code provided.
-1. Create a paste this code into a `subscribe.html` file at the top level of your blog's directory.
+1. Paste this code into a `subscribe.html` file at the top level of your blog's directory.
 
 ### Modify _quarto.yml
 
@@ -209,4 +209,4 @@ plenty of great guides online!.
 
 ## Acknowledgements
 
-Thanks to Isaac Flath for collaborating with me on this guide! You can view his blog, works, and contact here [https://isaac-flath.tech](blog link).
+Thanks to Isaac Flath for collaborating with me on this guide! You can view his blog, works, and contact [here](https://isaac-flath.tech).
