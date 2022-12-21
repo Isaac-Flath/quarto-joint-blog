@@ -44,35 +44,80 @@ Switch between the tabs below to view the steps for each option.
 
 The first thing we need to do is create a MailerLite Campaign.  That is what will actually send the email.
 
+### Quarto Setup
+
+Make sure RSS feeds are enabled on your blog.  Instructions for how to do this are in [the Quarto Documentation](https://quarto.org/docs/websites/website-blog.html#rss-feed).
+
+
 ### MailerLite Campaign Setup
 
-1. Make sure RSS feeds are enabled on your blog.  Instructions for how to do this are in [the Quarto Documentation](https://quarto.org/docs/websites/website-blog.html#rss-feed).
-1. [Create a MailerLite account](https://www.mailerlite.com/signup).
-1. Once you have an account and are logged in, [create an RSS Campaign](https://dashboard.mailerlite.com/campaigns/create).  You will need to fill in some information, including the URL of your RSS feed.  It should be a URL that ends with `.xml`.
-1. On the content page, choose start from scratch (free tier) or select a template (paid) and design your email that will go out.
-1. Select All Active Subscribers to send to. 
-1. Continue through to schedule.
+[Create a MailerLite account](https://www.mailerlite.com/signup)
 
+![](images/MailerLite1_signup.png)
+
+Once you have an account and are logged in, [create an RSS Campaign](https://dashboard.mailerlite.com/campaigns/create).  
+
+![](images/MailerLite2_NewCampaign.png)
+
+As you complete the Campaign creation process there are a few key options to look out for.
+
+As you progress through the signup form you will need to fill in some information and, including the URL of your RSS feed.  It should be a URL that ends with `.xml`.
+
+![](images/MailerLite3_RssFeedUrl.png)
+
+I recommend setting the email to only be sent when you have new blog posts.  This ensures that an email is only sent if you've published a new post.  Otherwise, an email is sent on a regular interval with the latest posts regardless of whether there is new content.
+
+![](images/MailerLite4_NewPostsOnly.png)
+
+On the content page, choose start from scratch (free tier) or select a template (paid) and design your email that will go out.
+
+![](images/MailerLite5_EmailDesign.png)
 
 :::{.callout-important}
 When you create an RSS campaign there are templates that can be used in the content tab for designing this email.  These are paid features that you get for free for the first 30 days.  Only use the templates if you intend to pay as they are not included in the free plan.
 :::
 
+Select All Active Subscribers to send to.
+
+![](images/MailerLite6_CampaignRecipients.png)
+
 :::{.callout-tip}
 
- You can create individual subscriber groups to have different campaigns go to different groups to give subscribers more options.  [Example here](https://isaac-flath.tech/blog.html).
+### Advanced Subscriber Settings
+
+You can create individual subscriber groups to have different campaigns go to different groups to give subscribers more options.  [Example here](https://isaac-flath.tech/blog.html).
  
+![](images/MailerLite7_Groups.png)
 :::
 
-Now that the campaign is set up, we need to create the widget that allows users to subscribe to the blog.  In Quarto, this is defined in the `subscribe.html` file.
+Continue through to schedule your campaign!
+
+![](images/MailerLite8_Schedule.png)
+
 
 ### Create subscribe.html
 
-1. [Create an embedded form](https://dashboard.mailerlite.com/forms/create?type=embedded).
-1. Use the GUI editor to style your embedded form!
-1. Once you created the form it will take you to that forms `Overview` page.  Scroll down to look for the `Embed form into your website` section.
-1. In that section select `HTML Code` and copy the code provided.
-1. Paste this code into a `subscribe.html` file at the top level of your blog's directory.
+Now that the campaign is set up and will go out to all subscribers, we need to create the widget that allows users to subscribe to the blog.  In other words we need a way for users to sign up!  In Quarto, this is defined in the `subscribe.html` file.  First, we need to use MailerLite to create the contents.
+
+In MailerLite this is called an `embedded form`.  We can use their GUI to [Create an embedded form](https://dashboard.mailerlite.com/forms/create?type=embedded).
+
+![](images/MailerLite9_NewForm.png)
+
+Once we start the form we can use the GUI form editor to design what we want the form to look like.  
+
+![](images/MailerLite11_FormDesign.png)
+
+:::{.callout-tip}
+
+I recommend leaving it with the default design for now, you can always come back and re-style it later if you don't like how it looks on your blog.  But it's much easier to get something working then improve upon it once it's working than to try to make something perfect the first time through!
+
+:::
+
+Once you created the form it will take you to that forms `Overview` page.  Scroll down to look for the `Embed form into your website` section.  In that section select `HTML Code` and copy the code provided.
+
+![](images/MailerLite12_FormHtml.png)
+
+Paste this code into a `subscribe.html` file at the top level of your blog's directory.
 
 ### Modify _quarto.yml
 

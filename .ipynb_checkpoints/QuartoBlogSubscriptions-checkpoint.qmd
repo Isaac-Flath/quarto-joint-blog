@@ -1,0 +1,79 @@
+---
+title: Adding Subscriptions to a Quarto Blog
+author: Isaac Flath
+date: '2022-12-03'
+description: How to add subscriptions to a quarto blog
+categories:
+  - Quarto
+image: ../_TopicImages/APL.jpg
+draft: true
+jupyter: python3
+---
+
+# Introduction
+
+We are writing this blog post to give a few options for adding email subscriptions to blog pages built in quarto in a step by step tutorial.  The [quarto documentation](https://quarto.org/docs/websites/website-blog.html#subscriptions) covers the Quarto part, but does not include steps not related to Quarto with setting up the subscriber list or third party account.  This post is intended to be a step-by-step guide **that fills in the gaps from the [quarto documentation](https://quarto.org/docs/websites/website-blog.html).**
+
+There are many options for setting this up.  Among them:
+
++ MailChimp: Mailchimp is mentioned in the quarto documentation briefly, but we have chose not to cover Mailchimp as it seems that they are working on deprecating the RSS email feed functionality that is necessary.
++ MailerLite: We believe this is a strong alternative to MailChimp.  Easy to set up and easy to use.
+
+# MailerLite
+
+The first thing we need to do is create a MailerLite Campaign.  That is what will actually send the email.
+
+
+:::{.callout-note}
+
+## MailerLite Campaign Setup
+
+1. Make sure RSS feeds are enabled on your blog.  Instructions for how to do this are in [the Quarto Documentation](https://quarto.org/docs/websites/website-blog.html#rss-feed)
+1. [Create a MailerLite account](https://www.mailerlite.com/signup)
+1. Once you have an account and are logged in [Create an RSS Campaign](https://dashboard.mailerlite.com/campaigns/create).  You will need to fill in some information, including the URL of your RSS feed.  It should be a URL that ends with `.xml`.
+1. On the content page, choose start from scratch (free tier) or select a template (paid) and design your email that will go out
+1. Select All Active Subscribers to send to. 
+1. Continue through to schedule
+:::
+
+:::{.callout-important}
+When you create an RSS campaign there are templates that can be used in the content tab for designing this email.  These are paid features that you get for free for the first 30 days.  Only use the templates if you intend to pay as they are not included in the free plan.
+:::
+
+:::{.callout-tip}
+
+ You can create individual subscriber groups to have different campaigns go to different groups to give subscribers more options.  [Example here](https://isaac-flath.tech/blog.html)
+ 
+:::
+
+Now that the campaign is set up, we need to create the widget that allows users to subscribe to the blog.  In Quarto, this is defined in the `subscribe.html` file.
+
+:::{.callout-note}
+
+## Create subscribe.html
+
+1. [Create an embedded form](https://dashboard.mailerlite.com/forms/create?type=embedded)
+1. Use the GUI editor to style your embedded form!
+1. Once you created the form it will take you to that forms `Overview` page.  Scroll down to look for the `Embed form into your website` section
+1. In that section select `HTML Code` and copy the code provided
+1. Create a paste this code into a `subscribe.html` file at the top level of your blog's directory
+:::
+
+:::{.callout-note}
+
+## Modify _quarto.yml
+
+Add the `subscribe.html` file to your `_quarto.yml` file by adding it to the `margin-header` attribute.  This option will look like this in your `_quarto.yml` file.
+
+```yaml
+website:
+  # (additional metadata excluded for brevity)
+  margin-header: subscribe.html
+```
+:::
+
+# Conclusion
+
+That is all it takes to get subscriptions working on your blog with MailerLite!  Everything you just set up is editable so if you don't like how the email or the subscription widget looks, you can go in and edit your templates.
+
+
