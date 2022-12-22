@@ -34,7 +34,7 @@ The three ways this guide will cover:
 
 * **HTML/JS**
 
-  For When you want to handle the frontend and the backend.
+  For when you want to handle the frontend and the backend.
 
 Switch between the tabs below to view the steps for each option.
 
